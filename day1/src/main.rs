@@ -1,7 +1,8 @@
 use itertools::Itertools;
 use std::{io::BufRead, time::Instant};
 
-fn input() -> Vec<usize> {
+// Another way
+fn input_old() -> Vec<usize> {
     std::io::stdin()
         .lock()
         .lines()
@@ -12,7 +13,22 @@ fn input() -> Vec<usize> {
             )
             .filter(|sum| sum > &0)
         })
-        .collect::<Vec<usize>>()
+        .collect()
+}
+
+fn input() -> Vec<usize> {
+    std::io::stdin()
+        .lock()
+        .lines()
+        .map(|v| v.unwrap().parse::<usize>().ok())
+        .batching(|it| {
+            let mut sum = None;
+            while let Some(Some(v)) = it.next() {
+                sum = Some(sum.unwrap_or(0) + v);
+            }
+            sum
+        })
+        .collect()
 }
 
 fn main() {
@@ -32,17 +48,3 @@ fn part2(input: &Vec<usize>) {
     let result: usize = input.iter().sorted().rev().take(3).sum();
     println!("Part 2 answer: {:?}", result);
 }
-
-// fn input() -> Vec<Vec<usize>> {
-//     std::io::stdin()
-//         .lock()
-//         .lines()
-//         .batching(|it| {
-//             Some(
-//                 it.map_while(|line| line.unwrap().parse().ok())
-//                     .collect::<Vec<usize>>(),
-//             )
-//             .filter(|list| !list.is_empty())
-//         })
-//         .collect::<Vec<Vec<usize>>>()
-// }
