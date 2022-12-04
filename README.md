@@ -5,3 +5,6 @@ All the examples can be tested by running `cat input.txt | cargo run` from the r
 
 ## Day 1
 Learned about [map_while](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map_while) and itertools' [batching](https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.batching).
+
+## Day 2
+Went for readability today, though I might work on a different solution.

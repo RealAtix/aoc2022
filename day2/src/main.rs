@@ -1,6 +1,6 @@
 use std::{io::BufRead, time::Instant};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 enum Shape {
     Rock,
     Paper,
@@ -81,6 +81,7 @@ fn main() {
 
     let input = input();
     part1(&input);
+    part2(&input);
 
     println!("Time elapsed is {:?}", time.elapsed())
 }
@@ -92,6 +93,41 @@ fn part1(input: &Vec<Vec<char>>) {
             let opponent = Shape::new(*hands.first().unwrap());
             let player = Shape::new(*hands.last().unwrap());
             GameRound::play(opponent, player).score()
+        })
+        .sum();
+    println!("Part 1 answer: {}", result);
+}
+
+fn part2(input: &Vec<Vec<char>>) {
+    let result: usize = input
+        .iter()
+        .map(|hands| {
+            use Shape::*;
+            let opponent = Shape::new(*hands.first().unwrap());
+            let cheating_player = match *hands.last().unwrap() {
+                'X' => {
+                    // Lose
+                    match opponent {
+                        Rock => Scissors,
+                        Paper => Rock,
+                        Scissors => Paper,
+                    }
+                }
+                'Y' => {
+                    // Draw
+                    opponent
+                }
+                'Z' => {
+                    // Win
+                    match opponent {
+                        Rock => Paper,
+                        Paper => Scissors,
+                        Scissors => Rock,
+                    }
+                }
+                _ => unreachable!(),
+            };
+            GameRound::play(opponent, cheating_player).score()
         })
         .sum();
     println!("Part 1 answer: {}", result);
