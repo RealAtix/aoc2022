@@ -33,16 +33,31 @@ fn main() {
 
     let input = input();
     part1(&input);
+    part2(&input);
 
     println!("Time elapsed is {:?}", time.elapsed())
 }
 
-fn part1(input: &[[Assignment; 2]]) {
+fn part1(input: &Vec<[Assignment; 2]>) {
     let result = input
         .iter()
         .filter(|[first, second]| {
             let c0 = first.contains(second.start()) && first.contains(second.end());
             let c1 = second.contains(first.start()) && second.contains(first.end());
+
+            c0 || c1
+        })
+        .count();
+
+    println!("Part 1 answer: {}", result);
+}
+
+fn part2(input: &Vec<[Assignment; 2]>) {
+    let result = input
+        .iter()
+        .filter(|[first, second]| {
+            let c0 = first.contains(second.start()) || first.contains(second.end());
+            let c1 = second.contains(first.start()) || second.contains(first.end());
 
             c0 || c1
         })

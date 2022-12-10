@@ -8,3 +8,8 @@ Learned about [map_while](https://doc.rust-lang.org/std/iter/trait.Iterator.html
 
 ## Day 2
 Went for readability today, though I might work on a different solution.
+
+## Day 3
+
+## Day 4
+
