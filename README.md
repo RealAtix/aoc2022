@@ -13,3 +13,6 @@ Went for readability today, though I might work on a different solution.
 
 ## Day 4
 
+## Day 5
+Learned about [nom](https://docs.rs/nom/latest/nom/) which allows you to write parsers and combine them together.
+
