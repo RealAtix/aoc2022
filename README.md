@@ -16,3 +16,5 @@ Went for readability today, though I might work on a different solution.
 ## Day 5
 Learned about [nom](https://docs.rs/nom/latest/nom/) which allows you to write parsers and combine them together.
 
+## Day 6
+Brushing up on bit manipulation for the optimized solutions
